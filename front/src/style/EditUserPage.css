@@ -1,0 +1,15 @@
+
+.edit-user-container {
+    margin-top: 2rem;
+}
+
+.search-container {
+    width: 100%;
+    padding-left: 85%;
+}
+
+.edit-user-tab-search {
+    border: none;
+    border-bottom: 1px solid #43cdf7;
+    margin-bottom: 1rem;
+}

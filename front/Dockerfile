@@ -1,0 +1,19 @@
+# pull official base image
+FROM node:alpine
+
+
+# Create app directory
+WORKDIR /app
+
+# install app dependencies
+COPY package*.json ./
+RUN npm i 
+
+# add app
+COPY . ./
+
+
+EXPOSE 3000
+
+# start app
+CMD ["npm", "start"]

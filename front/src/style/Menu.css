@@ -1,0 +1,28 @@
+.menu-container{
+    padding: 0px;
+}
+
+.bg-light {
+    background-color: transparent !important;
+    border-bottom: 3px solid #43cdf7;
+}
+
+.logo-menu{
+    width: 80px;
+}
+
+.main-menu{
+    width: 100%;
+    justify-content:flex-end;
+}
+
+.menu-item {
+    color: grey;
+}
+
+.menu-button {
+    border: 1px solid grey;
+    color: grey;
+    background: none;
+    margin-left: 25px;
+}

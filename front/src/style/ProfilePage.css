@@ -1,0 +1,48 @@
+
+.card {
+    width: 30rem;
+    margin-left: 11%;
+    margin-top: 2.5rem;
+}
+
+.profile-icon-container {
+    padding-top: 2.5rem;
+}
+
+.profile-icon {
+    border-radius: 30px;
+    padding: 10px;
+    font-size: 75px;
+    color: grey;
+    border: 2px solid grey;
+    display: inline-block;
+    float: left;
+}
+
+.icon-text {
+    padding-top: 25px;
+    margin-left: 100px;
+}
+
+.edit-icon {
+    float: right;
+    font-size: 15px;
+    color: grey;
+}
+
+.edit-button {
+    float: right;
+    color: grey;
+    border: 1px solid grey;
+}
+
+.edit-button {
+    float: right;
+    color: grey;
+    border: 1px solid grey;
+}
+
+button:hover {
+    background-color: #43CDF7!important;
+    border-color: #43CDF7!important;
+}

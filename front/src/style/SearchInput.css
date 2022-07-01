@@ -1,0 +1,18 @@
+.dash-input{
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 4px solid #43cdf7;
+}
+
+
+.google-places-autocomplete__suggestions-container{
+    position: absolute;
+    width: 100%;
+    padding: 15px;
+    cursor: pointer;
+    z-index: 1;
+    background: #fff;
+    border: 1px solid #43cdf7;
+
+}

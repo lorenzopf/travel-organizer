@@ -1,0 +1,41 @@
+{
+  "name": "back",
+  "version": "0.0.0",
+  "description": "Api Code Review",
+  "main": "server.js",
+  "dependencies": {
+    "amadeus": "^5.0.0",
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "file-system": "^2.2.2",
+    "fs": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
+    "mongodb": "^3.5.7",
+    "mongoose": "^5.9.12",
+    "oauth": "^0.9.15",
+    "passport": "^0.4.1",
+    "passport-github": "^1.1.0",
+    "passport-github2": "^0.1.12",
+    "passport-jwt": "^4.0.0",
+    "passport-oauth2": "^1.5.0",
+    "request": "^2.88.2",
+    "swagger-ui-express": "^4.1.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "jasmine": "^3.5.0",
+    "mocha": "^8.0.1"
+  },
+  "scripts": {
+    "test": "jasmine",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

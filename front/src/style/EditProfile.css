@@ -1,0 +1,15 @@
+
+.container-edition-form {
+    position: relative;
+    top: 30%;
+    left: 35%;
+    width: 350px;
+    text-align: center;
+    border: 1px solid grey;
+    padding: 15px;
+}
+
+.title-form {
+    color: grey;
+    margin-bottom: 25px;
+}

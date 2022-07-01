@@ -1,0 +1,9 @@
+.card-title{
+    background: #349cbb;
+
+    padding: 5px;
+}
+
+.card-title a {
+    color: #fff;
+}

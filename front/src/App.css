@@ -1,0 +1,21 @@
+html,body{
+  height: 100%;
+  position:relative;
+}
+body{
+  font-family: 'Roboto', sans-serif;
+}
+
+div#root{
+  height: auto;
+  position:relative;
+}
+div.container{
+  height: 100%;
+  position:relative;
+
+}
+
+h1,h2,h3,h4,h5{
+  font-weight: 300;
+}

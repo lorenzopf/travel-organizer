@@ -1,0 +1,21 @@
+.map-marker{
+    color: #43cdf7;
+}
+
+
+.map-marker-info{
+    display: block;
+    transform: scale(1);
+    z-index: 15;
+    min-width:200px;
+    min-height: 100px;
+    bottom: 100%;
+    left: 0;
+    padding: 10px;
+    font-size: 16px;
+    position:absolute;
+    background: #ffffff;
+    display: none;
+}
+
+.map-marker-info:hover{display: block;}

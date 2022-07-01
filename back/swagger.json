@@ -1,0 +1,747 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "RoadTrip",
+        "description": "An API for application RoadTrip",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/api/v1",
+    "tags": [
+        {
+            "name": "Users",
+            "description": "API for users in the system"
+        },
+        {
+            "name": "Locations",
+            "description": "API for location informations in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/users": {
+            "get": {
+                "summary": "Get list of users",
+                "tags": [
+                    "Users"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of users",
+                        "schema": {
+                            "$ref": "#/definitions/UserList"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "body",
+                        "required": true,
+                        "description": "Email of user"
+                    },
+                    {
+                        "name": "password",
+                        "in": "body",
+                        "required": true,
+                        "description": "Password of user"
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Login to application with email and password",
+                "responses": {
+                    "401": {
+                        "description": "Wrong password",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "msg": {
+                                    "type": "string",
+                                    "example": "you entrered the wrong password"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User could not be found",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "msg": {
+                                    "type": "string",
+                                    "example": "could not find user"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "User is found",
+                        "schema": {
+                            "$ref": "#/definitions/UserLoggedByLogin"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/signup": {
+            "post": {
+                "parameters": [
+                    {
+                        "name": "firstname",
+                        "in": "body",
+                        "required": true,
+                        "description": "First name of user"
+                    },
+                    {
+                        "name": "lastname",
+                        "in": "body",
+                        "required": true,
+                        "description": "Last name of user"
+                    },
+                    {
+                        "name": "pseudo",
+                        "in": "body",
+                        "required": true,
+                        "description": "Nickname of user"
+                    },
+                    {
+                        "name": "email",
+                        "in": "body",
+                        "required": true,
+                        "description": "Email of user"
+                    },
+                    {
+                        "name": "password",
+                        "in": "body",
+                        "required": true,
+                        "description": "Password of user"
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Sign up to application with user informations",
+                "responses": {
+                    "200": {
+                        "description": "User is found",
+                        "schema": {
+                            "$ref": "#/definitions/UserLoggedBySignup"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/logout": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Logout to application",
+                "responses": {
+                    "200": {
+                        "description": "You logout correctly",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{id_user}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "id_user",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of user that we want to find",
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user with given ID",
+                "responses": {
+                    "200": {
+                        "description": "User is found",
+                        "schema": {
+                            "$ref": "#/definitions/UserFound"
+                        }
+                    },
+                    "204": {
+                        "description": "User doesn't exist",
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "this user doesn't exist"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{id_user}/delete": {
+            "delete": {
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of user that we want to delete",
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete user with given ID",
+                "responses": {
+                    "200": {
+                        "description": "Confirmation",
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "the user has been deleted"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/find": {
+            "get": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Get latitude and longitude of given address",
+                "responses": {
+                    "200": {
+                        "description": "Location latitude and longitude found",
+                        "schema": {
+                            "properties": {
+                                "latitude": {
+                                    "type": "string",
+                                    "example": "43.6043"
+                                },
+                                "longitude": {
+                                    "type": "string",
+                                    "example": "1.4437"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Address query param not found",
+                        "schema": {
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Address query param not found"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Location not found",
+                        "schema": {
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Location not found"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Google map API break change",
+                        "schema": {
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Google map API break change"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/enjoy": {
+            "post": {
+                "tags": [
+                    "Locations"
+                ],
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "body",
+                        "required": true,
+                        "description": "Latitude of city"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "body",
+                        "required": true,
+                        "description": "Longitude of city"
+                    },
+                    {
+                        "name": "radius",
+                        "in": "body",
+                        "required": true,
+                        "description": "Radius of city"
+                    }
+                ],
+                "summary": "Found activities / events from coordinate city",
+                "responses": {
+                    "200": {
+                        "description": "Location latitude and longitude found",
+                        "schema": {
+                            "$ref": "#/definitions/LocationInfos"
+                        }
+                    },
+                    "400": {
+                        "description": "Incomplete query params",
+                        "schema": {
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Incomplete query params"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Activities or events not found",
+                        "schema": {
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Activities or events not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/sleep": {
+            "post": {
+                "tags": [
+                    "Locations"
+                ],
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "body",
+                        "required": true,
+                        "description": "Latitude of city"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "body",
+                        "required": true,
+                        "description": "Longitude of city"
+                    },
+                    {
+                        "name": "radius",
+                        "in": "body",
+                        "required": true,
+                        "description": "Radius of city"
+                    }
+                ],
+                "summary": "Found accomodations from coordinate city",
+                "responses": {
+                    "200": {
+                        "description": "Location latitude and longitude found",
+                        "schema": {
+                            "$ref": "#/definitions/LocationInfos"
+                        }
+                    },
+                    "400": {
+                        "description": "Incomplete query params",
+                        "schema": {
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Incomplete query params"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Accomodations not found",
+                        "schema": {
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Accomodations not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/travel": {
+            "post": {
+                "tags": [
+                    "Locations"
+                ],
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "body",
+                        "required": true,
+                        "description": "Latitude of city"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "body",
+                        "required": true,
+                        "description": "Longitude of city"
+                    },
+                    {
+                        "name": "radius",
+                        "in": "body",
+                        "required": true,
+                        "description": "Radius of city"
+                    }
+                ],
+                "summary": "Found transport from coordinate city",
+                "responses": {
+                    "200": {
+                        "description": "Location latitude and longitude found",
+                        "schema": {
+                            "$ref": "#/definitions/LocationInfos"
+                        }
+                    },
+                    "400": {
+                        "description": "Incomplete query params",
+                        "schema": {
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Incomplete query params"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Transit stations not found",
+                        "schema": {
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Transit stations not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/eat": {
+            "post": {
+                "tags": [
+                    "Locations"
+                ],
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "body",
+                        "required": true,
+                        "description": "Latitude of city"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "body",
+                        "required": true,
+                        "description": "Longitude of city"
+                    },
+                    {
+                        "name": "radius",
+                        "in": "body",
+                        "required": true,
+                        "description": "Radius of city"
+                    }
+                ],
+                "summary": "Found restaurant from coordinate city",
+                "responses": {
+                    "200": {
+                        "description": "Location latitude and longitude found",
+                        "schema": {
+                            "$ref": "#/definitions/LocationInfos"
+                        }
+                    },
+                    "400": {
+                        "description": "Incomplete query params",
+                        "schema": {
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Incomplete query params"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Restaurant not found",
+                        "schema": {
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Restaurant not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/drink": {
+            "post": {
+                "tags": [
+                    "Locations"
+                ],
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "body",
+                        "required": true,
+                        "description": "Latitude of city"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "body",
+                        "required": true,
+                        "description": "Longitude of city"
+                    },
+                    {
+                        "name": "radius",
+                        "in": "body",
+                        "required": true,
+                        "description": "Radius of city"
+                    }
+                ],
+                "summary": "Found bar from coordinate city",
+                "responses": {
+                    "200": {
+                        "description": "Location latitude and longitude found",
+                        "schema": {
+                            "$ref": "#/definitions/LocationInfos"
+                        }
+                    },
+                    "400": {
+                        "description": "Incomplete query params",
+                        "schema": {
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Incomplete query params"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Bar not found",
+                        "schema": {
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Bar not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "required": [
+                "id",
+                "firstname",
+                "lastname",
+                "pseudo",
+                "email",
+                "role",
+                "avatar_url",
+                "hash",
+                "salt",
+                "create_date"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "pseudo": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "avatar_url": {
+                    "type": "string"
+                },
+                "hash": {
+                    "type": "string"
+                },
+                "salt": {
+                    "type": "string"
+                },
+                "create_date": {
+                    "type": "string",
+                    "description": "Creation date of account"
+                }
+            }
+        },
+        "UserList": {
+            "required": [
+                "id",
+                "firstname",
+                "lastname",
+                "role"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                }
+            }
+        },
+        "Users": {
+            "type": "array",
+            "$ref": "#/definitions/UserList"
+        },
+        "UserLoggedByLogin": {
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "expiresIn": {
+                    "type": "string"
+                }
+            }
+        },
+        "UserLoggedBySignup": {
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                },
+                "user": {
+                    "type": "object",
+                    "$ref": "#/definitions/User"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "expiresIn": {
+                    "type": "string"
+                }
+            }
+        },
+        "UserFound": {
+            "properties": {
+                "user_id": {
+                    "type": "string"
+                },
+                "login": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                }
+            }
+        },
+        "LocationInfos": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "rating": {
+                    "type": "integer"
+                },
+                "user_ratings_total": {
+                    "type": "integer"
+                },
+                "vicinity": {
+                    "type": "object"
+                },
+                "location": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
